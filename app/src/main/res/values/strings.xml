@@ -2,7 +2,10 @@
     <string name="app_name">MyPosition</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="title_home">Map</string>
+    <string name="title_home">Tracking</string>
+    <string name="cancel">Cancelar</string>
+    <string name="ok">Ok</string>
+    <string name="permission">Request Permission</string>
     <string name="title_dashboard">Online Devices</string>
     <string name="title_notifications">Notifications</string>
 </resources>
