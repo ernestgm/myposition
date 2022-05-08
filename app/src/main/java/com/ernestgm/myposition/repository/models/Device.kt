@@ -3,9 +3,14 @@ package com.ernestgm.myposition.repository.models
 class Device(
     val id: String,
     val name: String,
-    val latitude: Double,
-    val longitude: Double
+    var latitude: Double,
+    var longitude: Double
 ) {
+    fun updateLocation(lat: Double, long: Double) {
+        this.latitude = lat
+        this.longitude = long
+
+    }
     fun toMap(): MutableMap<String, Any> {
         val map = HashMap<String, Any>()
 

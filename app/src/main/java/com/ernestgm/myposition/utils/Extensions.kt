@@ -19,6 +19,8 @@ import androidx.collection.forEach
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
+import com.ernestgm.myposition.repository.models.Device
+import com.ernestgm.myposition.ui.main.IFragmentNavigationHandler
 import com.google.android.material.tabs.TabLayout
 import java.text.SimpleDateFormat
 import java.util.*
@@ -53,6 +55,45 @@ inline fun <reified T : Activity> Activity.goToNewActivity(noinline init: Intent
     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
     intent.init()
     startActivity(intent)
+}
+
+fun Fragment.navigateTo(actionId: Int, args: Bundle? = null) {
+    activity?.let {
+        if (it is IFragmentNavigationHandler) {
+            it.goToFragment(actionId, args)
+        }
+    }
+}
+
+fun Map<*,*>.toDevice(): Device? {
+    return if (this["id"] != null) {
+        Device(
+            this["id"] as String,
+            this["name"] as String,
+            this["latitude"].toString().toDouble(),
+            this["longitude"].toString().toDouble(),
+        )
+    } else {
+        null
+    }
+}
+
+fun Map<String?,Any?>.mapToDevices(): List<Device> {
+    val devicesList: ArrayList<Device> = arrayListOf()
+
+    //iterate through each user, ignoring their UID
+
+    //iterate through each user, ignoring their UID
+    for ((_, value) in this.entries) {
+        //Get user map
+        val singleDevice = value as Map<*, *>
+        //Get phone field and append to list
+        singleDevice.toDevice()?.let { device ->
+            devicesList.add(device)
+        }
+    }
+
+    return devicesList
 }
 
 //inline fun <I, O, M : ResultMapper<I, O>> Data<I>.mapWith(factory: () -> M): Result<O> {
@@ -200,13 +241,7 @@ inline fun <reified T : Activity> Activity.goToNewActivity(noinline init: Intent
 //    return this % 2 == 0
 //}
 //
-//fun Fragment.navigateTo(actionId: Int, args: Bundle? = null) {
-//    activity?.let {
-//        if (it is IFragmentNavigationHandler) {
-//            it.goToFragment(actionId, args)
-//        }
-//    }
-//}
+
 //
 //fun Fragment.navigateDirection(direction: NavDirections) {
 //    findNavController().navigate(direction)

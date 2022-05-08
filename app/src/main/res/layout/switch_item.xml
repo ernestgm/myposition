@@ -1,0 +1,27 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+<LinearLayout
+     android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="Activate Tracking"
+        android:layout_marginRight="10dp"
+        />
+    <Switch
+        android:id="@+id/sw_enable_tracking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:theme="@style/MySwitch"
+         />
+</LinearLayout>
+</RelativeLayout>
